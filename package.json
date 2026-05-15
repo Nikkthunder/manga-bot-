@@ -1,6 +1,9 @@
 {
   "name": "manhwa-bot",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node bot_queue.js"
+  },
   "dependencies": {
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
