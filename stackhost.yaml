@@ -1,0 +1,8 @@
+# StackHost configuration for manhwa-bot
+name: manhwa-bot           # any name
+type: worker                # background worker, not a web service
+runtime: docker             # we provide a Dockerfile
+region: eu                  # optional: choose your preferred region (eu, us, asia)
+env:
+  BOT_TOKEN: ""             # leave empty; actual value is set in StackHost dashboard
+  CHAT_ID: ""               # same here – use the dashboard to fill these in
