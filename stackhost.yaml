@@ -1,11 +1,22 @@
 # StackHost configuration for manhwa-bot
-name: manhwa-bot
-type: worker                     # background worker, not a web service
-runtime:
-  engine: docker                 # Docker‑based deployment
-  dockerfile: Dockerfile         # path to your Dockerfile (default is fine)
+user:
+  name: YourName
+  github: YourGitHubUsername
 
-# Environment variables – leave values empty, fill them in the StackHost dashboard
+runtime:
+  image: puppeteer/puppeteer:latest   # Node 20 + full Chromium + all dependencies
+
+commands:
+  # No extra apt packages needed – the image already has everything
+  package: ""
+  build:
+    - npm install
+  start: node bot_queue.js
+
+repository:
+  branch: main
+  auto_deploy: true
+
 env:
-  BOT_TOKEN: ""
-  CHAT_ID: ""
+  - BOT_TOKEN:YOUR_BOT_TOKEN
+  - CHAT_ID:YOUR_CHAT_ID
