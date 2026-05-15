@@ -56,7 +56,10 @@ async function scrapeAndUploadPDF(url, chapterName, chatId) {
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage'   // essential for Docker
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--single-process',       // reduces memory, helpful for free tier
+            '--disable-extensions'
         ]
     });
     const page = await browser.newPage();
