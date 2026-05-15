@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-# Install Chromium dependencies (Debian-based)
+# Install Chromium dependencies
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     fonts-liberation \
@@ -22,15 +22,12 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Create app directory
 WORKDIR /usr/src/app
 
-# Copy package files and install
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the source code
 COPY . .
 
-# The bot runs as a background worker – no HTTP port needed
-CMD ["node", "bot_queue.js"]
+# Limit Node.js memory to avoid OOM on free tier (512 MB max old space)
+CMD ["node", "--max-old-space-size=384", "bot_queue.js"]
