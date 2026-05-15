@@ -1,17 +1,18 @@
-# StackHost configuration for manhwa-bot
 user:
   name: YourName
   github: YourGitHubUsername
 
 runtime:
-  image: puppeteer/puppeteer:latest   # Node 20 + full Chromium + all dependencies
+  image: node:22
 
 commands:
-  # No extra apt packages needed – the image already has everything
-  package: ""
+  # All the libraries Chromium needs (space‑separated, exactly as the schema wants)
+  package: ca-certificates fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 libgbm1 libgtk-3-0 libnspr4 libnss3 libu2f-udev libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 xdg-utils
+
   build:
     - npm install
-  start: node bot_queue.js
+
+  start: node --max-old-space-size=384 bot_queue.js
 
 repository:
   branch: main
